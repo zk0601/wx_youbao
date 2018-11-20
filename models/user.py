@@ -16,6 +16,7 @@ class UserBase(Base):
     gender = Column(VARCHAR(12))
     province = Column(VARCHAR(255))
     city = Column(VARCHAR(255))
+    country = Column(VARCHAR(255))
     create_time = Column(DATETIME, default=datetime.now(), nullable=False)
 
     def keys(self):

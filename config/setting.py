@@ -24,3 +24,8 @@ define('APPSecret', default='', help='wechat secret')
 
 define("wx_token", default='', help='wechat token')
 define("EncodingAESKey", default='', help='wechat EncodingAESKey')
+
+define("wx_access_url", default='https://api.weixin.qq.com/sns/oauth2/access_token', help='wechat access token request url')
+define("wx_refresh_url", default='https://api.weixin.qq.com/sns/oauth2/refresh_token', help='wechat refresh access token')
+define("wx_userinfo_url", default='https://api.weixin.qq.com/sns/userinfo', help='wechat get userinfo')
+
