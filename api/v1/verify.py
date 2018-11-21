@@ -3,9 +3,10 @@ import tornado.web
 import config.setting
 from tornado.options import options
 import hashlib
+from ..base import BaseHandler
 
 
-class WeChatVerifyHandler(tornado.web.RequestHandler):
+class WeChatVerifyHandler(BaseHandler):
     @run_on_executor
     def get(self):
         try:
@@ -29,5 +30,5 @@ class WeChatVerifyHandler(tornado.web.RequestHandler):
                 return False
 
         except Exception as e:
-            self.application.logger.error(str(e))
+            self.logger.error(str(e))
             return False

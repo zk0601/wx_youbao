@@ -99,6 +99,8 @@ class UserStoreInfoHandler(BaseHandler):
             offen_businesstravel = int(form_data["offen_businesstravel"])
             offen_car = int(form_data["offen_car"])
             city = form_data["city"]
+            name = form_data["name"]
+            phone = str(form_data["phone"])
 
             user = self.session.query(UserFrom).filter(UserFrom.openid == openid).first()
             if not user:
@@ -107,7 +109,8 @@ class UserStoreInfoHandler(BaseHandler):
                                 has_socialsecurity=has_socialsecurity, has_housloans=has_housloans, houseloans_total=houseloans_total,
                                 houseloans_permonth=houseloans_permonth, houseloans_years=houseloans_years, has_carloans=has_carloans,
                                 carloans_total=carloans_total, carloans_permonth=carloans_permonth, carloans_years=carloans_years,
-                                offen_businesstravel=offen_businesstravel, offen_car=offen_car, city=city, create_time=datetime.datetime.now())
+                                offen_businesstravel=offen_businesstravel, offen_car=offen_car, city=city, name=name,
+                                phone=phone, create_time=datetime.datetime.now())
                 self.session.add(user)
             else:
                 user.gender = gender
@@ -130,6 +133,8 @@ class UserStoreInfoHandler(BaseHandler):
                 user.offen_businesstravel = offen_businesstravel
                 user.offen_car = offen_car
                 user.city = city
+                user.name = name
+                user.phone = phone
             self.session.commit()
 
             return self.response(code=10000, msg='success')

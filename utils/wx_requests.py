@@ -1,5 +1,6 @@
 import requests
 from tornado.options import options
+import config.setting
 
 
 def wx_get_access_token(code):
