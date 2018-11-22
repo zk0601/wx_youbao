@@ -2,7 +2,7 @@ from tornado.concurrent import run_on_executor
 import time
 import datetime
 from ..base import BaseHandler
-from utils.wx_payment import request_prepayment, get_sign, random_str
+from utils.wx_payment import request_prepayment, get_sign, random_str, order_num
 from models.product import Product
 from models.order import Order
 from models.user import UserFrom
@@ -51,13 +51,16 @@ class OrderPaymentHandler(BaseHandler):
             phone = user.phone
             product = self.session.query(Product).filter(Product.id == product_id).first()
             fee = float(product.price)
+            out_trade_no = order_num(phone)
 
             order = Order(product_id=product_id, product_name=product.name, product_description=product.description,
-                          total_fee=float(product.price), create_ts=datetime.datetime.now(), openid=openid, pay_status=1)
+                          total_fee=float(product.price), create_ts=datetime.datetime.now(), openid=openid, pay_status=1,
+                          out_trade_no=out_trade_no)
             self.session.add(order)
+            self.session.flush()
             orderid = order.id
 
-            pay_data = request_prepayment(openid, int(fee * 100), phone, orderid)
+            pay_data = request_prepayment(openid, int(fee * 100), out_trade_no, orderid)
             if pay_data['return_code'] == 'FAIL':
                 return self.response(code=10003, msg=pay_data["return_msg"])
             if pay_data['result_code'] == 'FAIL':

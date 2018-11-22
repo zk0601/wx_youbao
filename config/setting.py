@@ -32,6 +32,7 @@ define("wx_access_url", default='https://api.weixin.qq.com/sns/oauth2/access_tok
 define("wx_refresh_url", default='https://api.weixin.qq.com/sns/oauth2/refresh_token', help='wechat refresh access token')
 define("wx_userinfo_url", default='https://api.weixin.qq.com/sns/userinfo', help='wechat get userinfo')
 define("wx_payment_url", default="https://api.mch.weixin.qq.com/pay/unifiedorder", help='wechat order')
+define("wx_orderquery_url", default="https://api.mch.weixin.qq.com/pay/orderquery", help='wechat order query')
 
 define('server_ip', default='', help='wechat payment require a server ip')
 define('notify_url', default='', help='wechat payment callback url')

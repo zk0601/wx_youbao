@@ -7,14 +7,14 @@ from tornado.options import options
 import config.setting
 
 
-def request_prepayment(openid, total_fee, phone, orderid):
+def request_prepayment(openid, total_fee, out_trade_no, orderid):
     post_data = {
         "appid": options.AppID,
         "mch_id": options.merchant_id,
         "nonce_str": random_str(8),
         "sign_type": "MD5",
         "body": "有保-保险服务",
-        "out_trade_no": order_num(phone),
+        "out_trade_no": out_trade_no,
         "total_fee": total_fee,
         "spbill_create_ip": options.server_ip,
         "notify_url": options.notify_url,
@@ -82,3 +82,18 @@ def trans_xml_to_dict(data_xml):
         return {}
     data_dict = dict([(item.name, item.text) for item in xml.find_all()])
     return data_dict
+
+
+def request_query_order(out_trade_no):
+    data = {
+        "appid": options.AppID,
+        "mch_id": options.merchant_id,
+        "out_trade_no": out_trade_no,
+        "nonce_str": random_str(16),
+        "sign_type": "MD5"
+    }
+    sign = get_sign(data)
+    data["sign"] = sign
+    res = requests.post(options.wx_orderquery_url, data=trans_dict_to_xml(data))
+    res_data = trans_xml_to_dict(res.content)
+    return res_data

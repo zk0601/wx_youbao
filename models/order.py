@@ -18,6 +18,7 @@ class Order(Base):
     pay_status = Column(INTEGER, default=None)
     openid = Column(VARCHAR(255), ForeignKey('user_base.openid'), nullable=False)
     complete_time = Column(DATETIME)
+    out_trade_no = Column(VARCHAR(255), nullable=False)
 
     def keys(self):
         return [c.name for c in self.__table__.columns]

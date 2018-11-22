@@ -15,7 +15,11 @@ class PayCallbackHandler(BaseHandler):
             back_sign = get_sign(data)
             if sign == back_sign:
                 order_id = data["attach"]
-                order = self.session.query(Order).filter(Order.id == order_id).first()
+                out_trade_no = data["out_trade_no"]
+                order = self.session.query(Order).filter(Order.id == order_id, Order.out_trade_no == out_trade_no).first()
+                if not order:
+                    return self.write("<xml><return_code><![CDATA[]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>")
+
                 if order.pay_status == 1:
                     order.pay_status = 2
                     order.complete_time = datetime.datetime.now()
