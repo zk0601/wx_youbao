@@ -2,6 +2,7 @@ from tornado.concurrent import run_on_executor
 from ..base import BaseHandler
 import datetime
 import traceback
+import json
 
 from models.user import UserBase, UserFrom, Spouse, Children
 from utils.wx_requests import wx_get_userinfo, wx_get_access_token, wx_refresh_access_token
@@ -76,6 +77,7 @@ class UserStoreInfoHandler(BaseHandler):
         try:
             openid = self.get_argument("openid", None)
             form_data = self.get_argument("form_data", None)
+            form_data = json.loads(form_data)
             self_people = form_data["self_people", None]
 
             if not openid or not form_data or not self_people:
