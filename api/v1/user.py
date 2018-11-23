@@ -111,9 +111,9 @@ class UserStoreInfoHandler(BaseHandler):
                     child_list.append(c.id)
                 if len(child_list) == 3:
                     first_child_id, second_child_id, third_child_id = child_list[0], child_list[1], child_list[2]
-                if len(child_list) == 2:
+                elif len(child_list) == 2:
                     first_child_id, second_child_id, third_child_id = child_list[0], child_list[1], 0
-                if len(child_list) == 1:
+                elif len(child_list) == 1:
                     first_child_id, second_child_id, third_child_id = child_list[0], 0, 0
                 else:
                     first_child_id, second_child_id, third_child_id = 0, 0, 0
@@ -167,7 +167,7 @@ class UserStoreInfoHandler(BaseHandler):
                 user.gender = gender
                 user.family = family
                 user.children_num = children_num
-                user.spouse = spouse
+                user.spouse_id = spouse_id
                 user.first_child_id = first_child_id
                 user.second_child_id = second_child_id
                 user.third_child_id = third_child_id

@@ -19,8 +19,8 @@ define("max_workers", default=25, type=int, help="max threads")
 define("secret", default='Youbao~348#fgMFHz24$9deHPfL', help="token secret")
 
 #wechat config
-define("AppID", default='', help='wechat develop id')
-define('APPSecret', default='', help='wechat secret')
+define("AppID", default='wxdd1aae652aa93507', help='wechat develop id')
+define('APPSecret', default='5ca29e1e2ddf080b5f13025370e972e0', help='wechat secret')
 define('merchant_id', default='', help='wechat merchant number')
 
 define("wx_token", default='', help='wechat token')
@@ -34,5 +34,5 @@ define("wx_userinfo_url", default='https://api.weixin.qq.com/sns/userinfo', help
 define("wx_payment_url", default="https://api.mch.weixin.qq.com/pay/unifiedorder", help='wechat order')
 define("wx_orderquery_url", default="https://api.mch.weixin.qq.com/pay/orderquery", help='wechat order query')
 
-define('server_ip', default='', help='wechat payment require a server ip')
-define('notify_url', default='', help='wechat payment callback url')
+define('server_ip', default='47.110.67.202', help='wechat payment require a server ip')
+define('notify_url', default='https://temp.mibaoxian.com/youbao/v1/order/paycallback', help='wechat payment callback url')
