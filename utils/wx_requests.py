@@ -31,4 +31,4 @@ def wx_get_userinfo(access_token, openid):
         "lang": "zh_CN"
     }
     res = requests.get(options.wx_userinfo_url, params=data)
-    return res.json()
+    return res.content.decode('utf-8')

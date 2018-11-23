@@ -20,8 +20,9 @@ class WeChatVerifyHandler(BaseHandler):
 
             alist = [options.wx_token, timestamp, nonce]
             alist.sort()
+            tmp = ''.join(alist)
             sha1 = hashlib.sha1()
-            map(sha1.update, alist)
+            sha1.update(tmp.encode('utf-8'))
             hashcode = sha1.hexdigest()
 
             if hashcode == signature:
