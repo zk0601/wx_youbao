@@ -18,7 +18,7 @@ class WeChatVerifyHandler(BaseHandler):
             if not signature or not timestamp or not nonce or not echostr:
                 return False
 
-            alist = [options.token, timestamp, nonce]
+            alist = [options.wx_token, timestamp, nonce]
             alist.sort()
             sha1 = hashlib.sha1()
             map(sha1.update, alist)
