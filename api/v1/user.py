@@ -43,10 +43,18 @@ class UserLoginHandler(BaseHandler):
                     city = user_info["city"]
                     country = user_info["country"]
                     headimgurl = user_info["headimgurl"]
-
-                    user = UserBase(openid=openid, nickname=nickname, image_url=headimgurl, gender=sex, province=province,
-                                    city=city, country=country, create_time=datetime.datetime.now())
-                    self.session.add(user)
+                    user = self.session.query(UserBase).filter(UserBase.openid == openid).first()
+                    if not user:
+                        user = UserBase(openid=openid, nickname=nickname, image_url=headimgurl, gender=sex, province=province,
+                                        city=city, country=country, create_time=datetime.datetime.now())
+                        self.session.add(user)
+                    else:
+                        user.nickname = nickname
+                        user.gender = sex
+                        user.province = province
+                        user.city = city
+                        user.country = country
+                        user.image_url = headimgurl
                     self.session.commit()
 
                     userid = user.id
