@@ -1,6 +1,7 @@
 import requests
 from tornado.options import options
 import config.setting
+import json
 
 
 def wx_get_access_token(code):
@@ -31,4 +32,4 @@ def wx_get_userinfo(access_token, openid):
         "lang": "zh_CN"
     }
     res = requests.get(options.wx_userinfo_url, params=data)
-    return res.content.decode('utf-8')
+    return json.loads(res.content.decode('utf-8'))

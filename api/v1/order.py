@@ -8,6 +8,7 @@ from models.order import Order
 from models.user import UserFrom
 from tornado.options import options
 import config.setting
+import traceback
 
 
 class OrderDetailHandler(BaseHandler):
@@ -35,6 +36,7 @@ class OrderDetailHandler(BaseHandler):
 
         except Exception as e:
             self.logger.error(str(e))
+            print(traceback.print_exc())
             return self.response(code=10000, msg='服务端异常')
 
 
@@ -85,5 +87,6 @@ class OrderPaymentHandler(BaseHandler):
 
         except Exception as e:
             self.logger.error(str(e))
+            print(traceback.print_exc())
             self.session.rollback()
             return self.response(code=10000, msg='服务端异常')

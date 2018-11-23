@@ -1,6 +1,7 @@
 from tornado.concurrent import run_on_executor
 from ..base import BaseHandler
 import datetime
+import traceback
 
 from models.user import UserBase, UserFrom, Spouse, Children
 from utils.wx_requests import wx_get_userinfo, wx_get_access_token, wx_refresh_access_token
@@ -55,7 +56,8 @@ class UserLoginHandler(BaseHandler):
                     return self.response(data=data, code=10001, msg='success')
 
         except Exception as e:
-            self.logger.error(str(e))
+            self.logger.error(e)
+            print(traceback.print_exc())
             self.session.rollback()
             return self.response(code=10000, msg='服务端异常')
 
@@ -197,5 +199,6 @@ class UserStoreInfoHandler(BaseHandler):
 
         except Exception as e:
             self.logger.error(str(e))
+            print(traceback.print_exc())
             self.session.rollback()
             return self.response(code=10000, msg='服务端异常')

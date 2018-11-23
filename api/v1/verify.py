@@ -1,6 +1,7 @@
 from tornado.concurrent import run_on_executor
 import tornado.web
 import config.setting
+import traceback
 from tornado.options import options
 import hashlib
 from ..base import BaseHandler
@@ -32,4 +33,5 @@ class WeChatVerifyHandler(BaseHandler):
 
         except Exception as e:
             self.logger.error(str(e))
+            print(traceback.print_exc())
             return False

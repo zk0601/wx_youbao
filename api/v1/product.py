@@ -1,5 +1,6 @@
 from tornado.concurrent import run_on_executor
 from ..base import BaseHandler
+import traceback
 
 from models.product import Product
 
@@ -22,5 +23,6 @@ class ProductListHandler(BaseHandler):
 
         except Exception as e:
             self.logger.error(str(e))
+            print(traceback.print_exc())
             return self.response(code=10000, msg='服务端异常')
 
