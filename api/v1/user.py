@@ -78,7 +78,7 @@ class UserStoreInfoHandler(BaseHandler):
             openid = self.get_argument("openid", None)
             form_data = self.get_argument("form_data", None)
             form_data = json.loads(form_data)
-            self_people = form_data["self_people", None]
+            self_people = form_data["self_people"]
 
             if not openid or not form_data or not self_people:
                 return self.response(code=10002, msg='参数错误')
@@ -143,7 +143,7 @@ class UserStoreInfoHandler(BaseHandler):
             income = int(self_people["income"])
             profession = self_people["profession"]
             has_socialsecurity = int(self_people["has_socialsecurity"])
-            has_housloans = int(self_people["has_housloans"])
+            has_housloans = int(self_people["has_houseloans"])
             if has_housloans == 1:
                 houseloans_total = int(self_people["houseloans_total"])
                 houseloans_permonth = int(self_people["houseloans_permonth"])
