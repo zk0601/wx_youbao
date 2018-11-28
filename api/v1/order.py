@@ -70,13 +70,14 @@ class OrderPaymentHandler(BaseHandler):
 
             self.session.commit()
             sign_data = dict()
-            sign_data['appid'] = options.AppID
-            sign_data['timeStamp'] = int(time.time())
+            sign_data['appId'] = options.AppID
+            sign_data['timeStamp'] = str(int(time.time()))
             sign_data['nonceStr'] = random_str(16)
             sign_data['package'] = 'prepay_id=' + pay_data['prepay_id']
             sign_data['signType'] = 'MD5'
             sign = get_sign(sign_data)
             return_data = {
+                'appId': sign_data['appId'],
                 'timeStamp': sign_data['timeStamp'],
                 'nonceStr': sign_data['nonceStr'],
                 'package': sign_data['package'],
