@@ -4,7 +4,7 @@ import datetime
 import traceback
 import json
 
-from models.user import UserBase, UserFrom, Spouse, Children
+from models.user import User_Base, User_From, Spouse, Children
 from utils.wx_requests import wx_get_userinfo, wx_get_access_token, wx_refresh_access_token
 
 
@@ -44,9 +44,9 @@ class UserLoginHandler(BaseHandler):
                     city = user_info["city"]
                     country = user_info["country"]
                     headimgurl = user_info["headimgurl"]
-                    user = self.session.query(UserBase).filter(UserBase.openid == openid).first()
+                    user = self.session.query(User_Base).filter(User_Base.openid == openid).first()
                     if not user:
-                        user = UserBase(openid=openid, nickname=nickname, image_url=headimgurl, gender=sex, province=province,
+                        user = User_Base(openid=openid, nickname=nickname, image_url=headimgurl, gender=sex, province=province,
                                         city=city, country=country, create_time=datetime.datetime.now())
                         self.session.add(user)
                     else:
@@ -163,9 +163,9 @@ class UserStoreInfoHandler(BaseHandler):
             name = self_people["name"]
             phone = str(self_people["phone"])
 
-            user = self.session.query(UserFrom).filter(UserFrom.openid == openid).first()
+            user = self.session.query(User_From).filter(User_From.openid == openid).first()
             if not user:
-                user = UserFrom(openid=openid, gender=gender, family=family, children_num=children_num, spouse_id=spouse_id,
+                user = User_From(openid=openid, gender=gender, family=family, children_num=children_num, spouse_id=spouse_id,
                                 first_child_id=first_child_id, second_child_id=second_child_id, third_child_id=third_child_id,
                                 is_supportparents=is_supportparents,
                                 birthday=birthday, is_sick=is_sick, disease=disease, income=income, profession=profession,

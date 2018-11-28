@@ -6,7 +6,7 @@ Base = declarative_base()
 
 
 #user_base_model
-class UserBase(Base):
+class User_Base(Base):
     __tablename__ = 'user_base'
 
     id = Column(INTEGER, primary_key=True, autoincrement=True)
@@ -24,7 +24,7 @@ class UserBase(Base):
 
 
 #user_form_model
-class UserFrom(Base):
+class User_From(Base):
     __tablename__ = 'user_form'
 
     id = Column(INTEGER, primary_key=True, autoincrement=True)

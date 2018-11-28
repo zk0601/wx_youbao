@@ -5,7 +5,7 @@ from ..base import BaseHandler
 from utils.wx_payment import request_prepayment, get_sign, random_str, order_num
 from models.product import Product
 from models.order import Order
-from models.user import UserFrom
+from models.user import User_From
 from tornado.options import options
 import config.setting
 import traceback
@@ -49,7 +49,7 @@ class OrderPaymentHandler(BaseHandler):
             if not openid or not product_id:
                 return self.response(code=10002, msg='参数错误')
 
-            user = self.session.query(UserFrom).filter(UserFrom.openid == openid).first()
+            user = self.session.query(User_From).filter(User_From.openid == openid).first()
             phone = user.phone
             product = self.session.query(Product).filter(Product.id == product_id).first()
             fee = float(product.price)
