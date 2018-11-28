@@ -51,7 +51,7 @@ def order_num(phone):
     :return:
     """
     local_time = datetime.datetime.strftime(datetime.datetime.now(), '%Y%m%d%H%M%S')
-    result = phone + 'Time' + local_time + random_str(8)
+    result = phone + 'T' + local_time + random_str(5)
     return result
 
 
