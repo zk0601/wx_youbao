@@ -11,7 +11,7 @@ def request_prepayment(openid, total_fee, out_trade_no, orderid):
     post_data = {
         "appid": options.AppID,
         "mch_id": options.merchant_id,
-        "nonce_str": random_str(8),
+        "nonce_str": random_str(16),
         "sign_type": "MD5",
         "body": "有保-保险服务",
         "out_trade_no": out_trade_no,
@@ -57,8 +57,8 @@ def order_num(phone):
 
 def get_sign(data_dict):
     # 签名函数，参数为签名的数据和密钥
-    params_list = sorted(data_dict.items(), key=lambda e: e[0])
-    params_str = "&".join("{}={}".format(k, v) for k, v in params_list) + '&key=' + options.pay_key
+    params_list = sorted(data_dict.items(), key=lambda e: e[0], reverse=False)
+    params_str = "&".join(u"{}={}".format(k, v) for k, v in params_list) + '&key=' + options.pay_key
     md5 = hashlib.md5()
     md5.update(params_str.encode('utf-8'))
     sign = md5.hexdigest().upper()
