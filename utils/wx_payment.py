@@ -13,7 +13,7 @@ def request_prepayment(openid, total_fee, out_trade_no, orderid):
         "mch_id": options.merchant_id,
         "nonce_str": random_str(16),
         "sign_type": "MD5",
-        "body": "有保-保险服务",
+        "body": "wrapspeed",
         "out_trade_no": out_trade_no,
         "total_fee": total_fee,
         "spbill_create_ip": options.server_ip,
