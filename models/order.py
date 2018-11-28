@@ -16,7 +16,7 @@ class Order(Base):
     total_fee = Column(DECIMAL(8, 2), nullable=False)
     create_ts = Column(DATETIME, default=datetime.now(), nullable=False)
     pay_status = Column(INTEGER, default=None)
-    openid = Column(VARCHAR(255), ForeignKey('user_base.openid'), nullable=False)
+    user_openid = Column(VARCHAR(255), ForeignKey('user_base.openid'), nullable=False)
     complete_time = Column(DATETIME)
     out_trade_no = Column(VARCHAR(255), nullable=False)
 

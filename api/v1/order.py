@@ -19,7 +19,7 @@ class OrderDetailHandler(BaseHandler):
             if not openid:
                 return self.response(code=10002, msg='参数错误')
 
-            orders = self.session.query(Order).filter(Order.openid == openid).order_by(Order.pay_status.asc()).order_by(Order.id.desc()).all()
+            orders = self.session.query(Order).filter(Order.user_openid == openid).order_by(Order.pay_status.asc()).order_by(Order.id.desc()).all()
             ret_data = []
             for order in orders:
                 tmp = dict()
@@ -56,7 +56,7 @@ class OrderPaymentHandler(BaseHandler):
             out_trade_no = order_num(phone)
 
             order = Order(product_id=product_id, product_name=product.name, product_description=product.description,
-                          total_fee=float(product.price), create_ts=datetime.datetime.now(), openid=openid, pay_status=1,
+                          total_fee=float(product.price), create_ts=datetime.datetime.now(), user_openid=openid, pay_status=1,
                           out_trade_no=out_trade_no)
             self.session.add(order)
             self.session.flush()
