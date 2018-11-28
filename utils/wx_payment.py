@@ -60,7 +60,7 @@ def get_sign(data_dict):
     params_list = sorted(data_dict.items(), key=lambda e: e[0])
     params_str = "&".join("{}={}".format(k, v) for k, v in params_list) + '&key=' + options.pay_key
     md5 = hashlib.md5()
-    md5.update(params_str)
+    md5.update(params_str.encode('utf-8'))
     sign = md5.hexdigest().upper()
     return sign
 
