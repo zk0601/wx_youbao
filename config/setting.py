@@ -36,3 +36,8 @@ define("wx_orderquery_url", default="https://api.mch.weixin.qq.com/pay/orderquer
 
 define('server_ip', default='47.110.67.202', help='wechat payment require a server ip')
 define('notify_url', default='https://temp.mibaoxian.com/youbao/v1/order/paycallback', help='wechat payment callback url')
+
+# sms
+define("send_sms_url", default="http://zhibo.dejikeji.com/api/zhibo/v1/user/mobile/send", help="sms code url")
+define("verify_sms_url", default="http://zhibo.dejikeji.com/api/zhibo/v1/user/mobile/verify", help="verify smscode url")
+define("sms_type_code", default=301, type=int, help="verify smscode url")

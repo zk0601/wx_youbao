@@ -4,7 +4,7 @@ import datetime
 import traceback
 import json
 
-from models.user import User_Base, User_From, Spouse, Children
+from models.user import User_Base, User_From, Spouse, Children, Phone_Name
 from utils.wx_requests import wx_get_userinfo, wx_get_access_token, wx_refresh_access_token
 
 
@@ -160,20 +160,17 @@ class UserStoreInfoHandler(BaseHandler):
             offen_businesstravel = int(self_people["offen_businesstravel"])
             offen_car = int(self_people["offen_car"])
             city = self_people["city"]
-            name = self_people["name"]
-            phone = str(self_people["phone"])
 
             user = self.session.query(User_From).filter(User_From.openid == openid).first()
             if not user:
                 user = User_From(openid=openid, gender=gender, family=family, children_num=children_num, spouse_id=spouse_id,
                                 first_child_id=first_child_id, second_child_id=second_child_id, third_child_id=third_child_id,
-                                is_supportparents=is_supportparents,
+                                is_supportparents=is_supportparents, create_time=datetime.datetime.now(),
                                 birthday=birthday, is_sick=is_sick, disease=disease, income=income, profession=profession,
                                 has_socialsecurity=has_socialsecurity, has_housloans=has_housloans, houseloans_total=houseloans_total,
                                 houseloans_permonth=houseloans_permonth, houseloans_years=houseloans_years, has_carloans=has_carloans,
                                 carloans_total=carloans_total, carloans_permonth=carloans_permonth, carloans_years=carloans_years,
-                                offen_businesstravel=offen_businesstravel, offen_car=offen_car, city=city, name=name,
-                                phone=phone, create_time=datetime.datetime.now())
+                                offen_businesstravel=offen_businesstravel, offen_car=offen_car, city=city)
                 self.session.add(user)
             else:
                 user.gender = gender
@@ -201,8 +198,6 @@ class UserStoreInfoHandler(BaseHandler):
                 user.offen_businesstravel = offen_businesstravel
                 user.offen_car = offen_car
                 user.city = city
-                user.name = name
-                user.phone = phone
             self.session.commit()
 
             return self.response(code=10000, msg='success')
@@ -212,3 +207,25 @@ class UserStoreInfoHandler(BaseHandler):
             print(traceback.print_exc())
             self.session.rollback()
             return self.response(code=10000, msg='服务端异常')
+
+
+class UserStoreNamePhoneHandler(BaseHandler):
+    @run_on_executor
+    def post(self):
+        try:
+            openid = self.get_argument('openid', None)
+            name = self.get_argument('name', None)
+            phone = self.get_argument('phone', None)
+            if not openid or not name or not phone:
+                return self.response(code=10002, msg='参数错误')
+
+            phone_name = Phone_Name(name=name, phone=str(phone), openid=openid)
+            self.session.add(phone_name)
+            self.session.commit()
+
+        except Exception as e:
+            self.logger.error(str(e))
+            print(traceback.print_exc())
+            self.session.rollback()
+            return self.response(code=10000, msg='服务端异常')
+

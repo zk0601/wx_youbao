@@ -54,8 +54,6 @@ class User_From(Base):
     offen_businesstravel = Column(INTEGER, nullable=False)
     offen_car = Column(INTEGER, nullable=False)
     city = Column(VARCHAR(255), nullable=False)
-    name = Column(VARCHAR(255), nullable=False)
-    phone = Column(VARCHAR(12), nullable=False)
     create_time = Column(DATETIME, default=datetime.now(), nullable=False)
 
     def keys(self):
@@ -87,6 +85,18 @@ class Children(Base):
     birthday = Column(VARCHAR(255), nullable=False)
     is_sick = Column(INTEGER, nullable=False)
     disease = Column(VARCHAR(255), default="")
+
+    def keys(self):
+        return [c.name for c in self.__table__.columns]
+
+
+class Phone_Name(Base):
+    __tablename__ = 'phone_name'
+
+    id = Column(INTEGER, primary_key=True, autoincrement=True)
+    openid = Column(VARCHAR(255), unique=True)
+    name = Column(VARCHAR(255), nullable=False)
+    phone = Column(VARCHAR(255), nullable=False)
 
     def keys(self):
         return [c.name for c in self.__table__.columns]
