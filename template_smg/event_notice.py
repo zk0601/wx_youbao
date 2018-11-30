@@ -3,10 +3,12 @@ import config.setting
 import requests
 import datetime
 import json
+import os
 
 
 def get_token():
-    with open("access_token.txt", "r") as f:
+    access_token_file = os.path.join(os.path.dirname(__file__), "access_token.txt")
+    with open(access_token_file, "r") as f:
         content = f.read()
         data_dict = eval(content)
         time = datetime.datetime.strptime(data_dict["time"], '%Y-%m-%d %H:%M:%S')
@@ -25,7 +27,7 @@ def get_token():
         access_token = res.json().get("access_token")
         content = "{'access_token':" + str(access_token) + ",'time':" \
                   + str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')) + "}"
-        with open("access_token.txt", "w") as f:
+        with open(access_token_file, "w") as f:
             f.write(content)
         return access_token
 
