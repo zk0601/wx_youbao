@@ -44,4 +44,4 @@ define("sms_type_code", default=301, type=int, help="verify smscode url")
 
 # template_massage
 define('event_notice', default="TYWpdC1PcQMkEs6j4T6w6dLxUevNv2C4TQmLMw-L-Fw", help="wechat events notice id")
-define('detail_url', default='https://temp.mibaoxian.com/youbaobao/phonename', help='click detail direct url')
+define('detail_url', default='https://temp.mibaoxian.com/phonename', help='click detail direct url')

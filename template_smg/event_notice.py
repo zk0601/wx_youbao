@@ -43,7 +43,7 @@ def send_template_msg(openid):
                 "color": "#FF0000"
             },
             "keyword1": {
-                "value": "如有问题，您可选择自动联系客服，添加客服微信号",
+                "value": "如有问题，您可选择主动联系客服，添加客服微信号",
                 "color": "#173177"
             },
             "keyword2": {
