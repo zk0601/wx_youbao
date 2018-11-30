@@ -41,3 +41,7 @@ define('notify_url', default='https://temp.mibaoxian.com/youbao/v1/order/paycall
 define("send_sms_url", default="http://zhibo.dejikeji.com/api/zhibo/v1/user/mobile/send", help="sms code url")
 define("verify_sms_url", default="http://zhibo.dejikeji.com/api/zhibo/v1/user/mobile/verify", help="verify smscode url")
 define("sms_type_code", default=301, type=int, help="verify smscode url")
+
+# template_massage
+define('event_notice', default="TYWpdC1PcQMkEs6j4T6w6dLxUevNv2C4TQmLMw-L-Fw", help="wechat events notice id")
+define('detail_url', default='https://temp.mibaoxian.com/youbaobao/phonename', help='click detail direct url')
