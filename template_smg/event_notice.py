@@ -25,8 +25,8 @@ def get_token():
 
         res = requests.get(url, params=data, timeout=10)
         access_token = res.json().get("access_token")
-        content = "{'access_token':" + str(access_token) + ",'time':" \
-                  + str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')) + "}"
+        content = "{'access_token':" + str(access_token) + ",'time':" + "'" + \
+                  str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')) + "'" + "}"
         with open(access_token_file, "w") as f:
             f.write(content)
         return access_token
@@ -65,3 +65,7 @@ def send_template_msg(openid):
     url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + access_token
     res = requests.post(url, data=json_template)
     return res.json()
+
+
+if __name__ == '__main__':
+    get_token()
