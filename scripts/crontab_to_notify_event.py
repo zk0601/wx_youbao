@@ -42,6 +42,7 @@ class TemplateNotify(object):
             print(e)
             print(traceback.print_exc())
 
+
 if __name__ == '__main__':
     a = TemplateNotify()
     a.push_event()

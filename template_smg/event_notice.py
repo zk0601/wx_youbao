@@ -25,7 +25,7 @@ def get_token():
 
         res = requests.get(url, params=data, timeout=10)
         access_token = res.json().get("access_token")
-        content = "{'access_token':" + str(access_token) + ",'time':" + "'" + \
+        content = "{'access_token':" + "'" + str(access_token) + "'" + ",'time':" + "'" + \
                   str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')) + "'" + "}"
         with open(access_token_file, "w") as f:
             f.write(content)
