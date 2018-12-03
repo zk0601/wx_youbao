@@ -219,8 +219,13 @@ class UserStoreNamePhoneHandler(BaseHandler):
             if not openid or not name or not phone:
                 return self.response(code=10002, msg='参数错误')
 
-            phone_name = Phone_Name(name=name, phone=str(phone), openid=openid)
-            self.session.add(phone_name)
+            phone_name = self.session.query(Phone_Name).filter(Phone_Name.openid == openid).first()
+            if not phone_name:
+                phone_name = Phone_Name(name=name, phone=str(phone), openid=openid)
+                self.session.add(phone_name)
+            else:
+                phone_name.name = name
+                phone_name.phone = phone
             self.session.commit()
 
         except Exception as e:
