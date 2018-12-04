@@ -1,10 +1,13 @@
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
 from tornado.options import options
 from config import setting
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 import requests
 import traceback
-import os
 
 from models.order import Order
 from models.user import Phone_Name
