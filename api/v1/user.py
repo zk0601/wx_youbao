@@ -228,6 +228,8 @@ class UserStoreNamePhoneHandler(BaseHandler):
                 phone_name.phone = phone
             self.session.commit()
 
+            return self.response(code=10000, msg='success')
+
         except Exception as e:
             self.logger.error(str(e))
             print(traceback.print_exc())
