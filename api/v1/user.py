@@ -200,7 +200,7 @@ class UserStoreInfoHandler(BaseHandler):
                 user.city = city
             self.session.commit()
 
-            return self.response(code=10000, msg='success')
+            return self.response(code=10001, msg='success')
 
         except Exception as e:
             self.logger.error(str(e))
@@ -228,7 +228,7 @@ class UserStoreNamePhoneHandler(BaseHandler):
                 phone_name.phone = phone
             self.session.commit()
 
-            return self.response(code=10000, msg='success')
+            return self.response(code=10001, msg='success')
 
         except Exception as e:
             self.logger.error(str(e))
