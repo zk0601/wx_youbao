@@ -4,6 +4,7 @@ import datetime
 import traceback
 import json
 
+from utils.tools import filter_emoji
 from models.user import User_Base, User_From, Spouse, Children, Phone_Name
 from utils.wx_requests import wx_get_userinfo, wx_get_access_token, wx_refresh_access_token
 
@@ -39,6 +40,7 @@ class UserLoginHandler(BaseHandler):
                 else:
                     openid = user_info["openid"]
                     nickname = user_info["nickname"]
+                    nickname = filter_emoji(nickname, '?')
                     sex = user_info["sex"]
                     province = user_info["province"]
                     city = user_info["city"]
