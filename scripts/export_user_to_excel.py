@@ -18,8 +18,8 @@ class Export(TemplateNotify):
 
     def main(self):
         try:
-            # headers = ['用户微信昵称', '用户微信头像', '是否填写姓名电话', '姓名', '电话', '是否填写详细信息']
-            headers = ['nick_name', 'image', 'is_phone', 'name', 'phone', 'is_detail']
+            # headers = ['用户微信昵称', '用户微信头像', '是否填写姓名电话', '姓名', '电话', '是否填写详细信息', '订单支付时间']
+            headers = ['nick_name', 'image', 'is_phone', 'name', 'phone', 'is_detail', 'order_time']
             csv_list = []
             data_template = {
                 'nick_name': '',
@@ -27,7 +27,8 @@ class Export(TemplateNotify):
                 'is_phone': '',
                 'name': '',
                 'phone': '',
-                'is_detail': ''
+                'is_detail': '',
+                'order_time': ''
             }
             users = self.session.query(Order).filter(Order.pay_status == 2).all()
             for user in users:
@@ -48,6 +49,7 @@ class Export(TemplateNotify):
                     data['is_detail'] = '否'
                 else:
                     data['is_detail'] = '是'
+                data['order_time'] = user.complete_time.strftime("%Y-%m-%d %H:%M:%S")
                 csv_list.append(data)
 
             today = datetime.datetime.now().strftime("%Y%m%d")
