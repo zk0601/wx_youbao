@@ -21,12 +21,13 @@ define("secret", default='Youbao~348#fgMFHz24$9deHPfL', help="token secret")
 #wechat config
 define("AppID", default='wxdd1aae652aa93507', help='wechat develop id')
 define('APPSecret', default='cd2cd98d1c3c34f4093a1ade46fe342d', help='wechat secret')
-define('merchant_id', default='1518358911', help='wechat merchant number')
 
 define("wx_token", default='Youbao123456', help='wechat token')
 define("EncodingAESKey", default='ysV2I4oa7s9hC60TMA5TTm0Na4hk8fhLZ7krvrlXZ5d', help='wechat EncodingAESKey')
 
-define("pay_key", default='', help='wechat payment key')
+# payment
+define('merchant_id', default='1520796591', help='wechat merchant number')
+define("pay_key", default='wJAGIl0jiSxJQEm2bU5OpmKoc5XJHQSW', help='wechat payment key')
 
 define("wx_access_url", default='https://api.weixin.qq.com/sns/oauth2/access_token', help='wechat access token request url')
 define("wx_refresh_url", default='https://api.weixin.qq.com/sns/oauth2/refresh_token', help='wechat refresh access token')

@@ -37,6 +37,10 @@ def send_template_msg(openid):
         "touser": openid,
         "template_id": options.event_notice,
         "url": options.detail_url,
+        # 'miniprogram': {
+        #     'appid': 'wx2c9019cf1490a026',
+        #     'pagepath': 'pages/index/index'
+        # },
         "data": {
             "first": {
                 "value": "您好，如您已完成支付，请及时填写联系方式以便客服与您联系！",
