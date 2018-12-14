@@ -34,7 +34,8 @@ class Export(TemplateNotify):
             for user in users:
                 data = data_template.copy()
                 openid = user.user_openid
-                base = self.session.query(User_Base).filter(User_Base.openid == openid).first()
+                base = self.session.query(User_Base).filter(User_Base.openid == openid).all()
+                base = base[-1]
                 data['nick_name'] = base.nickname
                 data['image'] = base.image_url
                 phone = self.session.query(Phone_Name).filter(Phone_Name.openid == openid).first()
