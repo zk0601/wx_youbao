@@ -71,6 +71,8 @@ class UserLoginHandler(BaseHandler):
             print(traceback.print_exc())
             self.session.rollback()
             return self.response(code=10000, msg='服务端异常')
+        finally:
+            self.session.remove()
 
 
 class UserStoreInfoHandler(BaseHandler):
@@ -209,6 +211,8 @@ class UserStoreInfoHandler(BaseHandler):
             print(traceback.print_exc())
             self.session.rollback()
             return self.response(code=10000, msg='服务端异常')
+        finally:
+            self.session.remove()
 
 
 class UserStoreNamePhoneHandler(BaseHandler):
@@ -237,6 +241,8 @@ class UserStoreNamePhoneHandler(BaseHandler):
             print(traceback.print_exc())
             self.session.rollback()
             return self.response(code=10000, msg='服务端异常')
+        finally:
+            self.session.remove()
 
 
 class UserVerifyHandler(BaseHandler):
@@ -258,3 +264,5 @@ class UserVerifyHandler(BaseHandler):
             print(traceback.print_exc())
             self.session.rollback()
             return self.response(code=10000, msg='服务端异常')
+        finally:
+            self.session.remove()

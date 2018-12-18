@@ -36,3 +36,5 @@ class PayCallbackHandler(BaseHandler):
             print(traceback.print_exc())
             self.session.rollback()
             return self.write("<xml><return_code><![CDATA[]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>")
+        finally:
+            self.session.remove()

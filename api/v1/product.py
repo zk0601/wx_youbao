@@ -25,4 +25,6 @@ class ProductListHandler(BaseHandler):
             self.logger.error(str(e))
             print(traceback.print_exc())
             return self.response(code=10000, msg='服务端异常')
+        finally:
+            self.session.remove()
 
