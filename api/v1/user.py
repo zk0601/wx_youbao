@@ -238,3 +238,23 @@ class UserStoreNamePhoneHandler(BaseHandler):
             self.session.rollback()
             return self.response(code=10000, msg='服务端异常')
 
+
+class UserVerifyHandler(BaseHandler):
+    @run_on_executor
+    def post(self):
+        try:
+            openid = self.get_argument('openid', None)
+            if not openid:
+                return self.response(code=10002, msg='参数错误')
+
+            user = self.session.query(User_Base).filter(User_Base.openid == openid).first()
+            if not user:
+                return self.response(data='fail' , code=10001, msg='success')
+            else:
+                return self.response(data='success', code=10001, msg='success')
+
+        except Exception as e:
+            self.logger.error(str(e))
+            print(traceback.print_exc())
+            self.session.rollback()
+            return self.response(code=10000, msg='服务端异常')

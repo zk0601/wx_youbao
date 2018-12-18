@@ -1,6 +1,6 @@
 from api.v1.auth import UserAuthHandler
 from api.v1.verify import WeChatVerifyHandler
-from api.v1.user import UserLoginHandler, UserStoreInfoHandler, UserStoreNamePhoneHandler
+from api.v1.user import UserLoginHandler, UserStoreInfoHandler, UserStoreNamePhoneHandler, UserVerifyHandler
 from api.v1.product import ProductListHandler
 from api.v1.order import OrderDetailHandler, OrderPaymentHandler
 from api.v1.payment_callback import PayCallbackHandler
@@ -15,6 +15,7 @@ handlers = [
     (r'/v1/user/login', UserLoginHandler),
     (r'/v1/user/storeinfo', UserStoreInfoHandler),
     (r'/v1/user/phone_name', UserStoreNamePhoneHandler),
+    (r'/v1/user/verify', UserVerifyHandler),
 
     (r'/v1/product/list', ProductListHandler),
 
