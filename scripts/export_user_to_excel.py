@@ -18,8 +18,8 @@ class Export(TemplateNotify):
 
     def main(self):
         try:
-            # headers = ['用户微信昵称', '用户微信头像', '是否填写姓名电话', '姓名', '电话', '是否填写详细信息', '订单支付时间']
-            headers = ['nick_name', 'image', 'is_phone', 'name', 'phone', 'is_detail', 'order_time']
+            # headers = ['用户微信昵称', '用户微信头像', '是否填写姓名电话', '姓名', '电话', '微信' ,'是否填写详细信息', '订单支付时间']
+            headers = ['nick_name', 'image', 'is_phone', 'name', 'phone', 'wechat', 'is_detail', 'order_time']
             csv_list = []
             data_template = {
                 'nick_name': '',
@@ -27,6 +27,7 @@ class Export(TemplateNotify):
                 'is_phone': '',
                 'name': '',
                 'phone': '',
+                'wechat': '',
                 'is_detail': '',
                 'order_time': ''
             }
@@ -41,10 +42,10 @@ class Export(TemplateNotify):
                 phone = self.session.query(Phone_Name).filter(Phone_Name.openid == openid).first()
                 if not phone:
                     data['is_phone'] = '否'
-                    data['name'], data['phone'] = '', ''
+                    data['name'], data['phone'], data['wechat'] = '', '', ''
                 else:
                     data['is_phone'] = '是'
-                    data['name'], data['phone'] = phone.name, str(phone.phone)
+                    data['name'], data['phone'], data['wechat'] = phone.name, str(phone.phone), phone.wx_number
                 form_data = self.session.query(User_From).filter(User_From.openid == openid).first()
                 if not form_data:
                     data['is_detail'] = '否'

@@ -222,16 +222,18 @@ class UserStoreNamePhoneHandler(BaseHandler):
             openid = self.get_argument('openid', None)
             name = self.get_argument('name', None)
             phone = self.get_argument('phone', None)
-            if not openid or not name or not phone:
+            wx_number = self.get_argument('wx_number', None)
+            if not openid or not name or not phone or not wx_number:
                 return self.response(code=10002, msg='参数错误')
 
             phone_name = self.session.query(Phone_Name).filter(Phone_Name.openid == openid).first()
             if not phone_name:
-                phone_name = Phone_Name(name=name, phone=str(phone), openid=openid)
+                phone_name = Phone_Name(name=name, phone=str(phone), openid=openid, wx_number=wx_number)
                 self.session.add(phone_name)
             else:
                 phone_name.name = name
                 phone_name.phone = phone
+                phone_name.wx_number = wx_number
             self.session.commit()
 
             return self.response(code=10001, msg='success')

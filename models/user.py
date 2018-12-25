@@ -97,6 +97,7 @@ class Phone_Name(Base):
     openid = Column(VARCHAR(255), unique=True)
     name = Column(VARCHAR(255), nullable=False)
     phone = Column(VARCHAR(255), nullable=False)
+    wx_number = Column(VARCHAR(255), nullable=False)
 
     def keys(self):
         return [c.name for c in self.__table__.columns]
