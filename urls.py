@@ -7,6 +7,7 @@ from api.v1.payment_callback import PayCallbackHandler
 from api.v1.sms import SmsSendHandler, SmsVerifyHandler
 
 from api.v2.event_notice import EventNoticeHandler
+from api.v2.nonce_sign import GetSignHandler
 
 handlers = [
     (r'/v1/verify', WeChatVerifyHandler),
@@ -26,7 +27,8 @@ handlers = [
     (r'/v1/sms/send', SmsSendHandler),
     (r'/v1/sms/verify', SmsVerifyHandler),
 
-    (r'/v2/template/event', EventNoticeHandler)
+    (r'/v2/template/event', EventNoticeHandler),
+    (r'/v2/sign/sign', GetSignHandler)
 ]
 
 Need_Token_URLs = [
