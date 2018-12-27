@@ -14,6 +14,9 @@ class GetSignHandler(BaseHandler):
     def post(self):
         try:
             jsapilist = self.get_argument("jsApiList", None)
+            url = self.get_body_argument('url', None)
+            if not url or not jsapilist:
+                return self.response(code=10002, msg='缺少参数')
             jsapilist = json.loads(jsapilist)
 
             noncestr = random_str(16)
@@ -23,7 +26,12 @@ class GetSignHandler(BaseHandler):
                 'nonceStr': noncestr,
                 'jsApiList': jsapilist
             }
-            sgin = get_sign(data)
+            sign_data = {
+                'nonceStr': noncestr,
+                'timestamp': str(int(time.time())),
+                'url': url
+            }
+            sgin = get_sign(sign_data)
             data['signature'] = sgin
             return self.response(data=data, code=10001, msg='success')
 

@@ -86,12 +86,10 @@ def get_jsapi_ticket():
             'access_token': get_token(),
             'type': 'jsapi'
         }
-        print("1111111111:", data)
         url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
 
         res = requests.get(url, params=data, timeout=10)
 
-        print("2222222222222:", res.json())
         jsapi_ticket = res.json().get("ticket")
         content = "{'jsapi_ticket':" + "'" + str(jsapi_ticket) + "'" + ",'time':" + "'" + \
                   str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')) + "'" + "}"
@@ -104,7 +102,7 @@ def get_sign(data_dict):
     params_list = sorted(data_dict.items(), key=lambda e: e[0], reverse=False)
     jsapi_ticket = get_jsapi_ticket()
     params_str = jsapi_ticket + "&" + "&".join(u"{}={}".format(k, v) for k, v in params_list)
-    print("3333333333333:", params_str)
+    print(params_str)
     md5 = hashlib.md5()
     md5.update(params_str.encode('utf-8'))
     sign = md5.hexdigest().upper()
