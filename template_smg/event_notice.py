@@ -101,7 +101,7 @@ def get_jsapi_ticket():
 def get_sign(data_dict):
     params_list = sorted(data_dict.items(), key=lambda e: e[0], reverse=False)
     jsapi_ticket = get_jsapi_ticket()
-    params_str = jsapi_ticket + "&" + "&".join(u"{}={}".format(k, v) for k, v in params_list)
+    params_str = 'jsapi_ticket=' + jsapi_ticket + "&" + "&".join(u"{}={}".format(k, v) for k, v in params_list)
     print(params_str)
     md5 = hashlib.md5()
     md5.update(params_str.encode('utf-8'))
