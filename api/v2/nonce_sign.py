@@ -5,7 +5,8 @@ from ..base import BaseHandler
 from tornado.options import options
 import config.setting
 import traceback
-from utils.wx_payment import get_sign, random_str
+from utils.wx_payment import random_str
+from template_smg.event_notice import get_sign
 
 
 class GetSignHandler(BaseHandler):

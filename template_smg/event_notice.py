@@ -4,6 +4,7 @@ import requests
 import datetime
 import json
 import os
+import hashlib
 
 
 def get_token():
@@ -13,7 +14,7 @@ def get_token():
         data_dict = eval(content)
         time = datetime.datetime.strptime(data_dict["time"], '%Y-%m-%d %H:%M:%S')
 
-    if (datetime.datetime.now()-time).seconds < 7000:
+    if int((datetime.datetime.now()-time).total_seconds()) < 7000:
         return data_dict["access_token"]
     else:
         data = {
@@ -69,6 +70,45 @@ def send_template_msg(openid):
     url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=" + access_token
     res = requests.post(url, data=json_template)
     return res.json()
+
+
+def get_jsapi_ticket():
+    jsapi_ticket_file = os.path.join(os.path.dirname(__file__), "jsapi_ticket.txt")
+    with open(jsapi_ticket_file, "r") as f:
+        content = f.read()
+        data_dict = eval(content)
+        time = datetime.datetime.strptime(data_dict["time"], '%Y-%m-%d %H:%M:%S')
+
+    if int((datetime.datetime.now()-time).total_seconds()) < 7000:
+        return data_dict["jsapi_ticket"]
+    else:
+        data = {
+            'access_token': get_token(),
+            'type': 'jsapi'
+        }
+        print("1111111111:", data)
+        url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket'
+
+        res = requests.get(url, params=data, timeout=10)
+
+        print("2222222222222:", res.json())
+        jsapi_ticket = res.json().get("ticket")
+        content = "{'jsapi_ticket':" + "'" + str(jsapi_ticket) + "'" + ",'time':" + "'" + \
+                  str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')) + "'" + "}"
+        with open(jsapi_ticket_file, "w") as f:
+            f.write(content)
+        return jsapi_ticket
+
+
+def get_sign(data_dict):
+    params_list = sorted(data_dict.items(), key=lambda e: e[0], reverse=False)
+    jsapi_ticket = get_jsapi_ticket()
+    params_str = jsapi_ticket + "&" + "&".join(u"{}={}".format(k, v) for k, v in params_list)
+    print("3333333333333:", params_str)
+    md5 = hashlib.md5()
+    md5.update(params_str.encode('utf-8'))
+    sign = md5.hexdigest().upper()
+    return sign
 
 
 if __name__ == '__main__':
