@@ -28,11 +28,11 @@ class GetSignHandler(BaseHandler):
             }
             sign_data = {
                 'nonceStr': noncestr,
-                'timestamp': str(int(time.time())),
+                'timestamp': int(time.time()),
                 'url': url
             }
-            sgin = get_sign(sign_data)
-            data['signature'] = sgin
+            sign = get_sign(sign_data)
+            data['signature'] = sign
             return self.response(data=data, code=10001, msg='success')
 
         except Exception as e:
