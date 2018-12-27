@@ -1,5 +1,6 @@
 from tornado.concurrent import run_on_executor
 import time
+import json
 from ..base import BaseHandler
 from tornado.options import options
 import config.setting
@@ -11,15 +12,15 @@ class GetSignHandler(BaseHandler):
     @run_on_executor
     def post(self):
         try:
-            jsApiList = self.get_argument("jsApiList", None)
+            jsapilist = self.get_argument("jsApiList", None)
+            jsapilist = json.loads(jsapilist)
 
             noncestr = random_str(16)
             data = {
-                'debug': True,
                 'appId': options.AppID,
                 'timestamp': str(int(time.time())),
                 'nonceStr': noncestr,
-                'jsApiList': jsApiList
+                'jsApiList': jsapilist
             }
             sgin = get_sign(data)
             data['signature'] = sgin
