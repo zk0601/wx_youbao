@@ -27,7 +27,7 @@ class GetSignHandler(BaseHandler):
                 'jsApiList': jsapilist
             }
             sign_data = {
-                'nonceStr': noncestr,
+                'noncestr': noncestr,
                 'timestamp': int(time.time()),
                 'url': url
             }
