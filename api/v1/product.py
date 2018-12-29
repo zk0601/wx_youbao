@@ -17,6 +17,7 @@ class ProductListHandler(BaseHandler):
                 tmp["name"] = product.name
                 tmp["price"] = float(product.price)
                 tmp["description"] = product.description
+                tmp["sell_amount"] = product.sell_amount
                 ret_data.append(tmp)
 
             return self.response(data=ret_data, code=10001, msg='success')
