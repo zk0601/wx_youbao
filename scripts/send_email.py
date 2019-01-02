@@ -15,8 +15,9 @@ def send_email(text, header):
             today = datetime.datetime.now().strftime("%Y%m%d")
             send_file = os.path.join(os.path.dirname(__file__), "user_export", "%s.csv" % today)
             msg = MIMEMultipart()
-            msg['From'] = _format_addr('锦鲤保好运<%s>' % '15927260404@139.com')
-            msg['To'] = '934170914@qq.com,15927260404@139.com'
+            msg['From'] = _format_addr('锦鲤好运保<%s>' % '15927260404@139.com')
+            msg['To'] = '934170914@qq.com,635925409@qq.com'
+            # msg['To'] = '515350159@qq.com,15927260404@139.com'
             msg['Subject'] = Header(header, 'utf-8').encode()
             msg.attach(MIMEText(text, 'plain', 'utf-8'))
 
@@ -27,7 +28,8 @@ def send_email(text, header):
             server = smtplib.SMTP_SSL('smtp.139.com', 465)
             server.set_debuglevel(1)
             server.login('15927260404@139.com', '4608310zk')
-            server.sendmail('15927260404@139.com', '934170914@qq.com,15927260404@139.com'.split(','), msg.as_string())
+            server.sendmail('15927260404@139.com', '934170914@qq.com, 635925409@qq.com'.split(','), msg.as_string())
+            # server.sendmail('15927260404@139.com', '515350159@qq.com, 15927260404@139.com'.split(','), msg.as_string())
             break
 
         except Exception as e:

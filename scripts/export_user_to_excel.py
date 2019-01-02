@@ -56,7 +56,7 @@ class Export(TemplateNotify):
 
             today = datetime.datetime.now().strftime("%Y%m%d")
             csv_file = os.path.join(self.baseDir, 'user_export', '%s.csv' % today)
-            with open(csv_file, 'w', encoding='utf-8', newline='') as f:
+            with open(csv_file, 'w', newline='') as f:
                 writer = csv.DictWriter(f, headers)
                 writer.writeheader()
                 writer.writerows(csv_list)
