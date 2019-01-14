@@ -1,6 +1,5 @@
 import jwt
 import time
-import requests
 import tornado.web
 import datetime
 import config.setting

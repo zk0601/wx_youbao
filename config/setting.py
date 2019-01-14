@@ -8,6 +8,7 @@ define("port", default=8888, help="run on the given port", type=int)
 # define("mysql_database", default="youbao", help="database name")
 # define("mysql_user", default="root", help="database user")
 # define("mysql_password", default="123456", help="database password")
+#mysql pro
 define("mysql_host", default="47.110.232.145:3306", help="database host")
 define("mysql_database", default="youbao", help="database name")
 define("mysql_user", default="root", help="database user")
