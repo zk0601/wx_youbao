@@ -3,6 +3,9 @@ from tornado.options import define
 #port
 define("port", default=8888, help="run on the given port", type=int)
 
+#nginx_path
+define("nginx_path", default="youbao", help="second-level domain")
+
 #mysql test
 # define("mysql_host", default="47.91.252.155:3306", help="database host")
 # define("mysql_database", default="youbao", help="database name")

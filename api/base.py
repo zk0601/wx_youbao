@@ -85,7 +85,7 @@ class BaseHandler(tornado.web.RequestHandler):
         token = self.get_argument("token", None)
         # 登录权限
         if request_path in self.application.Need_Token_URLs and not self.userAuthCheck(token):
-            return self.redirect("/v1/user/auth")
+            return self.redirect("/%s/v1/user/auth" % options.nginx_path)
 
     def request_log(self):
         # 输出请求日志
