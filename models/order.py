@@ -22,3 +22,8 @@ class Order(Base):
 
     def keys(self):
         return [c.name for c in self.__table__.columns]
+
+
+if __name__ == '__main__':
+    from models import Engine
+    Base.metadata.create_all(Engine)
