@@ -5,4 +5,4 @@ requests == 2.20.0
 Pillow == 5.3.0
 PyJWT == 1.6.4
 bs4 == 0.0.1
-lxml == 4.2.5
+lxml == 4.6.2
